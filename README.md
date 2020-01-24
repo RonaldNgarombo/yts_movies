@@ -1,4 +1,4 @@
-This is a basic React Native App that display movies from the yts.ae api
+This is a basic React Native App that display movies from the yts.lt api
 
 It's part of my React Native learning process.
 
