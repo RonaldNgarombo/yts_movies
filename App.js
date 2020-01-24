@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, Text, View, Alert, ActivityIndicator } from 'react-native';
 
 import axios from 'axios';
 
@@ -17,14 +17,14 @@ export default function App() {
 
 		const getMovies = async () => {
 			try {
-				// const response = await axios.get(url);
+				const response = await axios.get(url);
 
-				// let movies = response.data.data.movies;
+				let movies = response.data.data.movies;
 
-				// setMovies(movies);
+				setMovies(movies);
 
 				// console.log(movie_data.data.movies);
-				setMovies(movie_data.data.movies);
+				// setMovies(movie_data.data.movies);
 			} catch (error) {
 				if (error == 'Error: Network Error') {
 					Alert.alert(
@@ -42,8 +42,17 @@ export default function App() {
 
 	return (
 		<View style={styles.container}>
-			<Text>Showing App.js</Text>
-			<MovieList movies={movieList} />
+			{movieList.length == 0 ? (
+				<ActivityIndicator
+					style={styles.loader}
+					size="large"
+					color="#ffffff"
+				/>
+			) : (
+				<MovieList movies={movieList} />
+			)}
+
+			{/* <Text>Showing App.js</Text> */}
 		</View>
 	);
 }
@@ -52,7 +61,10 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: '#000000'
-		// alignItems: 'center',
-		// justifyContent: 'center'
+	},
+	loader: {
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center'
 	}
 });
