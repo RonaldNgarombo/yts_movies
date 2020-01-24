@@ -6,6 +6,9 @@ import axios from 'axios';
 // Import the movieList component
 import MovieList from './components/Movie/MovieList';
 
+// Dummy Data
+import movie_data from './MOVIE_DATA';
+
 export default function App() {
 	const [movieList, setMovies] = useState([]);
 
@@ -14,18 +17,14 @@ export default function App() {
 
 		const getMovies = async () => {
 			try {
-				// abortController = new AbortController();
+				// const response = await axios.get(url);
 
-				const response = await axios.get(url);
+				// let movies = response.data.data.movies;
 
-				let movies = response.data.data.movies;
+				// setMovies(movies);
 
-				setMovies(movies);
-
-				() => {
-					// abortController.abort(response);
-					// axios.isCancel(url);
-				};
+				// console.log(movie_data.data.movies);
+				setMovies(movie_data.data.movies);
 			} catch (error) {
 				if (error == 'Error: Network Error') {
 					Alert.alert(
@@ -52,8 +51,8 @@ export default function App() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#fe6e00',
-		alignItems: 'center',
-		justifyContent: 'center'
+		backgroundColor: '#000000'
+		// alignItems: 'center',
+		// justifyContent: 'center'
 	}
 });

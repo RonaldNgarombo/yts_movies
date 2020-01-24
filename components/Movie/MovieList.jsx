@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, FlatList, Text } from 'react-native';
-import MovieCard from './MovieCard';
+import MovieInfo from './MovieInfo';
 
 const MovieList = ({ movies }) => {
 	// console.log(movies.length);
@@ -9,7 +9,7 @@ const MovieList = ({ movies }) => {
 		<View>
 			<FlatList
 				data={movies}
-				renderItem={({ item }) => <MovieCard movie={item} />}
+				renderItem={({ item }) => <MovieInfo movie={item} />}
 				keyExtractor={item => item.id.toString()}
 			/>
 		</View>
