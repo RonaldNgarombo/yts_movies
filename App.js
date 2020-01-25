@@ -1,70 +1,111 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Alert, ActivityIndicator } from 'react-native';
+import React, { Component } from 'react';
+import { Text, View } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
-import axios from 'axios';
+// You can import Ionicons from @expo/vector-icons if you use Expo or
+// react-native-vector-icons/Ionicons otherwise.
+import { Ionicons } from '@expo/vector-icons';
 
-// Import the movieList component
-import MovieList from './components/Movie/MovieList';
+// Importing Screens
+import HomeScreen from './screens/HomeScreen';
+import MovieDetailsScreen from './screens/MovieDetailsScreen';
+import SearchMovieScreen from './screens/SearchMovieScreen';
 
-// Dummy Data
-import movie_data from './MOVIE_DATA';
+// CONSTATNTS
+const PRIMARY_COLOR = '#fe6e00';
+const SECONDARY_COLOR = '#ffa500';
+const TERTIARY = '#ffffff';
 
-export default function App() {
-	const [movieList, setMovies] = useState([]);
+// The Home Stack that refers to the Home tab button
+const HomeStack = createStackNavigator(
+	{
+		Home: HomeScreen,
+		MovieDetails: MovieDetailsScreen
+	},
+	{
+		defaultNavigationOptions: {
+			headerStyle: {
+				backgroundColor: PRIMARY_COLOR
+			},
+			headerTintColor: '#ffffff',
+			headerTitleStyle: {
+				// fontWeight: 'bold',
+				fontStyle: 'italic'
+			}
+		}
+	}
+);
 
-	useEffect(() => {
-		const url = `https://yts.lt/api/v2/list_movies.json`;
+// The Search Stack that refers to the Search tab button
+const SearchStack = createStackNavigator(
+	{
+		MovieSearch: SearchMovieScreen
+	},
+	{
+		defaultNavigationOptions: {
+			headerStyle: {
+				backgroundColor: PRIMARY_COLOR
+			},
+			headerTintColor: '#ffffff',
+			headerTitleStyle: {
+				// fontWeight: 'bold',
+				fontStyle: 'italic'
+			}
+		}
+	}
+);
 
-		const getMovies = async () => {
-			try {
-				const response = await axios.get(url);
+// The Tab that appears at the bottom of the screen
+const TabNavigator = createBottomTabNavigator(
+	{
+		// Each key references a navigation stack
+		Home: HomeStack,
+		Search: SearchStack
+	},
+	{
+		// The initial route when that app first loads
+		initialRouteName: 'Home',
 
-				let movies = response.data.data.movies;
+		// Default configurations for the bottom navigation tab
+		defaultNavigationOptions: ({ navigation }) => ({
+			tabBarIcon: ({ focused, horizontal, tintColor }) => {
+				// Get current route from navigation.state
+				const { routeName } = navigation.state;
 
-				setMovies(movies);
+				// Get icon components from @expo/vectoricons
+				let IconComponent = Ionicons;
+				let iconName;
 
-				// console.log(movie_data.data.movies);
-				// setMovies(movie_data.data.movies);
-			} catch (error) {
-				if (error == 'Error: Network Error') {
-					Alert.alert(
-						`Network error`,
-						`Please connect to internet and try again`
-					);
+				// According to the route display the icon
+				if (routeName === 'Home') {
+					// iconName = focused ? 'md-home' : 'md-home-outline';
+					iconName = 'md-home';
+
+					// Sometimes we want to add badges to some icons.
+					// You can check the implementation below.
+					// IconComponent = HomeIconWithBadge;
+				} else if (routeName === 'Search') {
+					iconName = 'md-search';
 				}
 
-				console.log(`An error occurred: ${error}`);
+				// You can return any component that you like here!
+				return (
+					<IconComponent
+						name={iconName}
+						size={25}
+						color={tintColor}
+					/>
+				);
 			}
-		};
-
-		getMovies();
-	});
-
-	return (
-		<View style={styles.container}>
-			{movieList.length == 0 ? (
-				<ActivityIndicator
-					style={styles.loader}
-					size="large"
-					color="#ffffff"
-				/>
-			) : (
-				<MovieList movies={movieList} />
-			)}
-
-			{/* <Text>Showing App.js</Text> */}
-		</View>
-	);
-}
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#000000'
-	},
-	loader: {
-		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'center'
+		}),
+		tabBarOptions: {
+			// Set colors for the bottom tab icons
+			activeTintColor: PRIMARY_COLOR,
+			inactiveTintColor: 'gray'
+		}
 	}
-});
+);
+
+export default createAppContainer(TabNavigator);
