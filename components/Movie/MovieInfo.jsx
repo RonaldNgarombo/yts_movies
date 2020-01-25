@@ -1,14 +1,23 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
-const MovieInfo = ({ movie }) => {
+const MovieInfo = ({ movie, navigate }) => {
 	return (
 		<View style={styles.container}>
 			<View style={{ flex: 1 }}>
-				<Image
-					style={styles.image}
-					source={{ uri: `${movie.medium_cover_image}` }}
-				/>
+				<TouchableOpacity
+					onPress={() =>
+						navigate('MovieDetails', {
+							movieId: movie.id,
+							movieTitle: movie.title
+						})
+					}
+				>
+					<Image
+						style={styles.image}
+						source={{ uri: `${movie.medium_cover_image}` }}
+					/>
+				</TouchableOpacity>
 			</View>
 
 			<View style={{ flex: 1 }}>
@@ -27,10 +36,11 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		flexDirection: 'row',
-		marginBottom: 10
+		marginBottom: 10,
+		marginTop: 5
 	},
 	image: {
-		borderRadius: 10,
+		borderRadius: 5,
 		width: 200,
 		height: 200
 	},

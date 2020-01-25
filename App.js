@@ -13,7 +13,7 @@ import HomeScreen from './screens/HomeScreen';
 import MovieDetailsScreen from './screens/MovieDetailsScreen';
 import SearchMovieScreen from './screens/SearchMovieScreen';
 
-// CONSTATNTS
+// CONSTANTS
 const PRIMARY_COLOR = '#fe6e00';
 const SECONDARY_COLOR = '#ffa500';
 const TERTIARY = '#ffffff';
