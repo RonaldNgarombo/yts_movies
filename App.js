@@ -102,8 +102,12 @@ const TabNavigator = createBottomTabNavigator(
 		}),
 		tabBarOptions: {
 			// Set colors for the bottom tab icons
-			activeTintColor: PRIMARY_COLOR,
-			inactiveTintColor: 'gray'
+			activeTintColor: TERTIARY,
+			inactiveTintColor: 'gray',
+
+			style: {
+				backgroundColor: PRIMARY_COLOR
+			}
 		}
 	}
 );
