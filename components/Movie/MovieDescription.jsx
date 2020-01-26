@@ -13,8 +13,9 @@ import { Ionicons } from '@expo/vector-icons';
 // Import Components
 import Cast from './Cast';
 import Genres from './Genres';
+import MovieSuggestions from './MovieSuggestions';
 
-const MovieDescription = ({ movie }) => {
+const MovieDescription = ({ movie, suggestions }) => {
 	return (
 		<ScrollView
 			style={{
@@ -48,13 +49,11 @@ const MovieDescription = ({ movie }) => {
 				<Text style={styles.infoText}>{movie.year}</Text>
 
 				<Text style={styles.infoText}>
-					<Ionicons name="md-star-outline" size={20} />
-					{movie.rating}
+					<Ionicons name="md-star-outline" size={20} /> {movie.rating}
 				</Text>
 
 				<Text style={styles.infoText}>
-					<Ionicons name="md-time" size={20} />
-					{movie.runtime} mins
+					<Ionicons name="md-time" size={20} /> {movie.runtime} mins
 				</Text>
 			</View>
 
@@ -64,8 +63,7 @@ const MovieDescription = ({ movie }) => {
 				<Text style={styles.infoText}>{movie.mpa_rating}</Text>
 
 				<Text style={styles.infoText}>
-					<Ionicons name="md-heart" size={20} />
-					{movie.like_count}
+					<Ionicons name="md-heart" size={20} /> {movie.like_count}
 				</Text>
 			</View>
 
@@ -97,6 +95,8 @@ const MovieDescription = ({ movie }) => {
 						style={styles.galleryPhotos}
 					/>
 				</ScrollView>
+
+				<MovieSuggestions suggestions={suggestions} />
 			</View>
 		</ScrollView>
 	);

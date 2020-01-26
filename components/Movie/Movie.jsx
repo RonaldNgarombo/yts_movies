@@ -13,6 +13,7 @@ export default function Movie({ navigate }) {
 	const [movieList, setMovies] = useState([]);
 	useEffect(() => {
 		const url = `https://yts.lt/api/v2/list_movies.json`;
+
 		const getMovies = async () => {
 			try {
 				// const response = await axios.get(url);
@@ -34,8 +35,10 @@ export default function Movie({ navigate }) {
 				// console.log(`An error occurred: ${error}`);
 			}
 		};
+
 		getMovies();
 	});
+
 	return (
 		<View style={styles.container}>
 			{movieList.length == 0 ? (
