@@ -19,7 +19,7 @@ export default function Movie({ navigate }) {
 				// let movies = response.data.data.movies;
 				// setMovies(movies);
 
-				console.log(movie_data.data.movies);
+				// console.log(movie_data.data.movies);
 
 				setMovies(movie_data.data.movies);
 			} catch (error) {
@@ -28,8 +28,10 @@ export default function Movie({ navigate }) {
 						`Network error`,
 						`Please connect to internet and try again`
 					);
+				} else {
+					alert(`An error occurred`);
 				}
-				console.log(`An error occurred: ${error}`);
+				// console.log(`An error occurred: ${error}`);
 			}
 		};
 		getMovies();
