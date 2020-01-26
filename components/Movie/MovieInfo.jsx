@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
+import { Ionicons } from '@expo/vector-icons';
+
 const MovieInfo = ({ movie, navigate }) => {
 	return (
 		<View style={styles.container}>
@@ -20,11 +22,18 @@ const MovieInfo = ({ movie, navigate }) => {
 				</TouchableOpacity>
 			</View>
 
-			<View style={{ flex: 1 }}>
+			<View style={{ flex: 1, marginLeft: 10 }}>
 				<Text style={styles.title}>{movie.title} </Text>
-				<Text style={styles.infoText}>Year: {movie.year} </Text>
-				<Text style={styles.infoText}>Rating: {movie.rating} </Text>
-				<Text style={styles.infoText}>Runtime: {movie.runtime} </Text>
+
+				<Text style={styles.infoText}> {movie.year} </Text>
+
+				<Text style={styles.infoText}>
+					<Ionicons name="md-star-outline" size={20} /> {movie.rating}{' '}
+				</Text>
+
+				<Text style={styles.infoText}>
+					<Ionicons name="md-time" size={20} /> {movie.runtime}
+				</Text>
 			</View>
 		</View>
 	);
@@ -37,19 +46,24 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: 'row',
 		marginBottom: 10,
-		marginTop: 5
+		marginTop: 5,
+		marginLeft: 5,
+		marginRight: 5
 	},
+
 	image: {
 		borderRadius: 5,
-		width: 200,
-		height: 200
+		width: '100%',
+		height: 180
 	},
+
 	title: {
 		color: '#ffffff',
 		fontSize: 20,
 		fontWeight: 'bold',
 		marginBottom: 10
 	},
+
 	infoText: {
 		color: '#ffa500',
 		fontSize: 16

@@ -31,8 +31,7 @@ const styles = StyleSheet.create({
 	},
 
 	genreContainer: {
-		// alignItems: 'center',
-		// justifyContent: 'center'
+		// flex: 1
 	},
 
 	genre: {
@@ -40,10 +39,11 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		marginBottom: 30,
 		marginRight: 10,
-		borderBottomColor: PRIMARY_COLOR,
-		borderRightColor: PRIMARY_COLOR,
-		borderTopColor: PRIMARY_COLOR,
-		borderLeftColor: PRIMARY_COLOR
+		flex: 1,
+		borderColor: PRIMARY_COLOR,
+		borderWidth: 1,
+		padding: 5,
+		borderRadius: 10
 	}
 });
 

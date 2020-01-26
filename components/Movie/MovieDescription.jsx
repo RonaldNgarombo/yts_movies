@@ -8,6 +8,7 @@ import {
 	ScrollView,
 	StyleSheet
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 // Import Components
 import Cast from './Cast';
@@ -15,7 +16,13 @@ import Genres from './Genres';
 
 const MovieDescription = ({ movie }) => {
 	return (
-		<ScrollView style={{ backgroundColor: '#000000' }}>
+		<ScrollView
+			style={{
+				backgroundColor: '#000000',
+				paddingRight: 8,
+				paddingLeft: 8
+			}}
+		>
 			<ImageBackground
 				source={{ uri: `${movie.background_image}` }}
 				style={{ width: '100%', height: 300 }}
@@ -38,35 +45,26 @@ const MovieDescription = ({ movie }) => {
 			<Text style={styles.title}>{movie.title}</Text>
 
 			<View style={{ flex: 1, flexDirection: 'row' }}>
-				<Text style={styles.infoText}>
-					<Text style={{ color: TERTIARY_COLOR }}>Year: </Text>
-					{movie.year}
-				</Text>
+				<Text style={styles.infoText}>{movie.year}</Text>
 
 				<Text style={styles.infoText}>
-					<Text style={{ color: TERTIARY_COLOR }}>Rating: </Text>
+					<Ionicons name="md-star-outline" size={20} />
 					{movie.rating}
 				</Text>
 
 				<Text style={styles.infoText}>
-					<Text style={{ color: TERTIARY_COLOR }}>Runtime: </Text>
+					<Ionicons name="md-time" size={20} />
 					{movie.runtime} mins
 				</Text>
 			</View>
 
 			<View style={{ flex: 1, flexDirection: 'row' }}>
-				<Text style={styles.infoText}>
-					<Text style={{ color: TERTIARY_COLOR }}>Lang: </Text>
-					{movie.language}
-				</Text>
+				<Text style={styles.infoText}>{movie.language}</Text>
+
+				<Text style={styles.infoText}>{movie.mpa_rating}</Text>
 
 				<Text style={styles.infoText}>
-					<Text style={{ color: TERTIARY_COLOR }}>MPA: </Text>
-					{movie.mpa_rating}
-				</Text>
-
-				<Text style={styles.infoText}>
-					<Text style={{ color: TERTIARY_COLOR }}>Likes: </Text>
+					<Ionicons name="md-heart" size={20} />
 					{movie.like_count}
 				</Text>
 			</View>
